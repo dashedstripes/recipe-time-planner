@@ -165,12 +165,13 @@ class IngredientsList extends Component {
     let ingredients = this.state.ingredients.map((ingredient) => (
       <div key={ingredient.id}>
         <div>
-          <input type='text' value={ingredient.title} onChange={this.handleTitleChange.bind(this, ingredient.id)} />
-          <button onClick={this.handleDeleteIngredient.bind(this, ingredient.id)}>Delete</button>
+          <input type='text' autoFocus value={ingredient.title} onChange={this.handleTitleChange.bind(this, ingredient.id)} />
+          {/* Set TabIndex to -1 so that tab to change input skips the button */}
+          <button tabIndex='-1' onClick={this.handleDeleteIngredient.bind(this, ingredient.id)}>Delete</button>
         </div>
         {ingredient.timings.map((timing) => (
           <div key={timing.id}>
-            <select value={timing.type} onChange={this.handleSelectChange.bind(this, ingredient.id, timing.id)}>
+            <select value={timing.type} tabIndex='-1' onChange={this.handleSelectChange.bind(this, ingredient.id, timing.id)}>
               <option value={TIMING_TYPES.PREP}>PREP</option>
               <option value={TIMING_TYPES.COOK}>COOK</option>
             </select>
@@ -178,7 +179,7 @@ class IngredientsList extends Component {
             <span>HRS</span>
             <input type='number' value={timing.minutes} onChange={this.handleMinutesChange.bind(this, ingredient.id, timing.id)} />
             <span>MINS</span>
-            <button onClick={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}>Delete</button>
+            <button tabIndex='-1' onClick={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}>Delete</button>
           </div>
         ))}
         <div>
