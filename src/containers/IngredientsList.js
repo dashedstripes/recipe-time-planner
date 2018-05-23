@@ -175,9 +175,9 @@ class IngredientsList extends Component {
               <option value={TIMING_TYPES.PREP}>PREP</option>
               <option value={TIMING_TYPES.COOK}>COOK</option>
             </select>
-            <input type='number' value={timing.hours} onChange={this.handleHoursChange.bind(this, ingredient.id, timing.id)} />
+            <input type='number' value={timing.hours} min={0} max={12} onChange={this.handleHoursChange.bind(this, ingredient.id, timing.id)} />
             <span>HRS</span>
-            <input type='number' value={timing.minutes} onChange={this.handleMinutesChange.bind(this, ingredient.id, timing.id)} />
+            <input type='number' value={timing.minutes} min={0} max={59} onChange={this.handleMinutesChange.bind(this, ingredient.id, timing.id)} />
             <span>MINS</span>
             <button tabIndex='-1' onClick={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}>Delete</button>
           </div>
