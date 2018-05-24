@@ -158,10 +158,18 @@ class IngredientsList extends Component {
       </div>
     ))
 
+    let noIngredients = (
+      <div>
+        <p>No Ingredients.</p>
+      </div>
+    )
+
     return (
       <div>
         <button onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</button>
-        {ingredients}
+        {this.state.ingredients.length > 0 ?
+          ingredients :
+          noIngredients}
       </div >
     )
   }
