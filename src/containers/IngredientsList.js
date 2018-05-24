@@ -55,7 +55,7 @@ class IngredientsList extends Component {
       target: {
         hour: 7,
         minutes: 30,
-        time: TIMES.AM
+        time: TIMES.PM
       }
     }
 
