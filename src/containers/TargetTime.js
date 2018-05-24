@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button from '../components/Button';
 
 const TIMES = {
   AM: 0,
@@ -36,6 +37,9 @@ class TargetTime extends Component {
             <option value={TIMES.AM}>AM</option>
             <option value={TIMES.PM}>PM</option>
           </select>
+        </div>
+        <div>
+          <Button disabled={!this.props.isSaved} onClick={this.props.onSubmit.bind(this, this.state)}>GET YOUR PERSONALISED RECIPE PLAN</Button>
         </div>
       </div>
     )
