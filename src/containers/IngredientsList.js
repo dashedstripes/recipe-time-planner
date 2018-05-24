@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import Button from '../components/Button';
+import IngredientTitle from '../components/IngredientTitle';
+import IngredientTiming from '../components/IngredientTiming';
 
 const TIMING_TYPES = {
   PREP: 0,
@@ -134,26 +137,23 @@ class IngredientsList extends Component {
   render() {
     let ingredients = this.state.ingredients.map((ingredient) => (
       <div key={ingredient.id}>
-        <div>
-          <input type='text' autoFocus value={ingredient.title} onChange={this.handleTitleChange.bind(this, ingredient.id)} />
-          {/* Set TabIndex to -1 so that tab to change input skips the button */}
-          <button tabIndex='-1' onClick={this.handleDeleteIngredient.bind(this, ingredient.id)}>Delete</button>
-        </div>
+        <IngredientTitle
+          value={ingredient.title}
+          onChange={this.handleTitleChange.bind(this, ingredient.id)}
+          onDelete={this.handleDeleteIngredient.bind(this, ingredient.id)} />
         {ingredient.timings.map((timing) => (
-          <div key={timing.id}>
-            <select value={timing.type} tabIndex='-1' name='type' onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)}>
-              <option value={TIMING_TYPES.PREP}>PREP</option>
-              <option value={TIMING_TYPES.COOK}>COOK</option>
-            </select>
-            <input type='number' name='hours' value={timing.hours} min={0} max={12} onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)} />
-            <span>HRS</span>
-            <input type='number' name='minutes' value={timing.minutes} min={0} max={59} onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)} />
-            <span>MINS</span>
-            <button tabIndex='-1' onClick={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}>Delete</button>
-          </div>
+          <IngredientTiming
+            key={timing.id}
+            TIMING_TYPES={TIMING_TYPES}
+            timingValue={timing.type}
+            hoursValue={timing.hours}
+            minutesValue={timing.minutes}
+            onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)}
+            onDelete={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}
+          />
         ))}
         <div>
-          <button onClick={this.handleAddTiming.bind(this, ingredient.id)}>+ ADD A TIMING</button>
+          <Button onClick={this.handleAddTiming.bind(this, ingredient.id)}>+ ADD A TIMING</Button>
         </div>
       </div>
     ))
@@ -166,7 +166,7 @@ class IngredientsList extends Component {
 
     return (
       <div>
-        <button onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</button>
+        <Button onClick={this.handleAddIngredient}>+ ADD A TIMING</Button>
         {this.state.ingredients.length > 0 ?
           ingredients :
           noIngredients}
