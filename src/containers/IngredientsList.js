@@ -43,7 +43,7 @@ class IngredientsList extends Component {
     super(props)
 
     this.state = {
-      ingredients: []
+      ingredients: defaultIngredients
     }
 
     this.handleAddIngredient = this.handleAddIngredient.bind(this)
