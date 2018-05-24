@@ -5,43 +5,45 @@ const TIMING_TYPES = {
   COOK: 1
 }
 
+const defaultIngredients = [
+  {
+    id: 1,
+    title: 'Roast Chicken',
+    timings: [
+      {
+        id: 1,
+        type: TIMING_TYPES.PREP,
+        hours: 0,
+        minutes: 20
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Mashed Potato',
+    timings: [
+      {
+        id: 1,
+        type: TIMING_TYPES.PREP,
+        hours: 0,
+        minutes: 20
+      },
+      {
+        id: 2,
+        type: TIMING_TYPES.COOK,
+        hours: 1,
+        minutes: 10
+      }
+    ]
+  }
+]
+
 class IngredientsList extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      ingredients: [
-        {
-          id: 1,
-          title: 'Roast Chicken',
-          timings: [
-            {
-              id: 1,
-              type: TIMING_TYPES.PREP,
-              hours: 0,
-              minutes: 20
-            }
-          ]
-        },
-        {
-          id: 2,
-          title: 'Mashed Potato',
-          timings: [
-            {
-              id: 1,
-              type: TIMING_TYPES.PREP,
-              hours: 0,
-              minutes: 20
-            },
-            {
-              id: 2,
-              type: TIMING_TYPES.COOK,
-              hours: 1,
-              minutes: 10
-            }
-          ]
-        }
-      ]
+      ingredients: []
     }
 
     this.handleAddIngredient = this.handleAddIngredient.bind(this)
@@ -55,7 +57,7 @@ class IngredientsList extends Component {
         timings: [
           {
             id: 1,
-            type: TIMING_TYPES.COOK,
+            type: TIMING_TYPES.PREP,
             hours: 0,
             minutes: 20
           }
@@ -73,45 +75,13 @@ class IngredientsList extends Component {
     })
   }
 
-  handleSelectChange(ingredientId, timingId, e) {
+  handleTimingChange(ingredientId, timingId, e) {
     this.setState({
       ingredients: this.state.ingredients.map((ingredient) => {
         if (ingredient.id === ingredientId) {
           ingredient.timings.map((timing) => {
             if (timing.id === timingId) {
-              timing.type = e.target.value
-            }
-            return timing
-          })
-        }
-        return ingredient
-      })
-    })
-  }
-
-  handleHoursChange(ingredientId, timingId, e) {
-    this.setState({
-      ingredients: this.state.ingredients.map((ingredient) => {
-        if (ingredient.id === ingredientId) {
-          ingredient.timings.map((timing) => {
-            if (timing.id === timingId) {
-              timing.hours = e.target.value
-            }
-            return timing
-          })
-        }
-        return ingredient
-      })
-    })
-  }
-
-  handleMinutesChange(ingredientId, timingId, e) {
-    this.setState({
-      ingredients: this.state.ingredients.map((ingredient) => {
-        if (ingredient.id === ingredientId) {
-          ingredient.timings.map((timing) => {
-            if (timing.id === timingId) {
-              timing.minutes = e.target.value
+              timing[e.target.name] = e.target.value
             }
             return timing
           })
@@ -127,7 +97,7 @@ class IngredientsList extends Component {
         if (ingredient.id === id) {
           ingredient.timings.push({
             id: Date.now(),
-            type: TIMING_TYPES.COOK,
+            type: TIMING_TYPES.PREP,
             hours: 0,
             minutes: 20
           })
@@ -171,13 +141,13 @@ class IngredientsList extends Component {
         </div>
         {ingredient.timings.map((timing) => (
           <div key={timing.id}>
-            <select value={timing.type} tabIndex='-1' onChange={this.handleSelectChange.bind(this, ingredient.id, timing.id)}>
+            <select value={timing.type} tabIndex='-1' name='type' onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)}>
               <option value={TIMING_TYPES.PREP}>PREP</option>
               <option value={TIMING_TYPES.COOK}>COOK</option>
             </select>
-            <input type='number' value={timing.hours} min={0} max={12} onChange={this.handleHoursChange.bind(this, ingredient.id, timing.id)} />
+            <input type='number' name='hours' value={timing.hours} min={0} max={12} onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)} />
             <span>HRS</span>
-            <input type='number' value={timing.minutes} min={0} max={59} onChange={this.handleMinutesChange.bind(this, ingredient.id, timing.id)} />
+            <input type='number' name='minutes' value={timing.minutes} min={0} max={59} onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)} />
             <span>MINS</span>
             <button tabIndex='-1' onClick={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}>Delete</button>
           </div>
@@ -192,7 +162,7 @@ class IngredientsList extends Component {
       <div>
         <button onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</button>
         {ingredients}
-      </div>
+      </div >
     )
   }
 }
