@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import IngredientsList from './containers/IngredientsList';
-import TargetTime from './containers/TargetTime';
 
 class App extends Component {
   constructor(props) {
@@ -14,8 +13,6 @@ class App extends Component {
     return (
       <div>
         <IngredientsList />
-        <br />
-        <TargetTime />
       </div>
     );
   }

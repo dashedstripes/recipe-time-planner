@@ -8,6 +8,11 @@ const TIMING_TYPES = {
   COOK: 1
 }
 
+const TIMES = {
+  AM: 0,
+  PM: 1
+}
+
 const defaultIngredients = [
   {
     id: 1,
@@ -46,11 +51,25 @@ class IngredientsList extends Component {
     super(props)
 
     this.state = {
-      ingredients: defaultIngredients
+      ingredients: defaultIngredients,
+      target: {
+        hour: 7,
+        minutes: 30,
+        time: TIMES.AM
+      }
     }
 
+    this.handleTarget = this.handleTarget.bind(this)
     this.handleAddIngredient = this.handleAddIngredient.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
+
+  handleTarget(e) {
+    this.setState({
+      target: { ...this.state.target, [e.target.name]: e.target.value }
+    })
+  }
+
 
   handleAddIngredient() {
     this.setState({
@@ -134,6 +153,12 @@ class IngredientsList extends Component {
     })
   }
 
+  handleSubmit() {
+    // This is where we send the state to be manupulated and returned to generate a 
+    // recipe time plan.
+    console.log(this.state)
+  }
+
   render() {
     let ingredients = this.state.ingredients.map((ingredient) => (
       <div key={ingredient.id}>
@@ -170,6 +195,21 @@ class IngredientsList extends Component {
         {this.state.ingredients.length > 0 ?
           ingredients :
           noIngredients}
+        <div>
+          <p>What time would you like to dish up?</p>
+          <div>
+            <input type='number' name='hour' min={1} max={12} value={this.state.target.hour} onChange={this.handleTarget} />
+            <span>:</span>
+            <input type='number' name='minutes' min={0} max={59} value={this.state.target.minutes} onChange={this.handleTarget} />
+            <select name='time' value={this.state.target.time} onChange={this.handleTarget}>
+              <option value={TIMES.AM}>AM</option>
+              <option value={TIMES.PM}>PM</option>
+            </select>
+          </div>
+          <div>
+            <Button onClick={this.handleSubmit}>GET YOUR PERSONALISED RECIPE PLAN</Button>
+          </div>
+        </div>
       </div >
     )
   }
