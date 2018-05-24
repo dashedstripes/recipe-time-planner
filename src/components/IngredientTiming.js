@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from './Button'
 
 const IngredientTiming = ({ TIMING_TYPES, timingValue, hoursValue, minutesValue, onChange, onDelete }) => (
   <div>
@@ -10,7 +11,7 @@ const IngredientTiming = ({ TIMING_TYPES, timingValue, hoursValue, minutesValue,
     <span>HRS</span>
     <input type='number' name='minutes' value={minutesValue} min={0} max={59} onChange={onChange} />
     <span>MINS</span>
-    <button tabIndex='-1' onClick={onDelete}>Delete</button>
+    <Button tabIndex='-1' onClick={onDelete}>Delete</Button>
   </div>
 )
 
