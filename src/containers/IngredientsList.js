@@ -166,8 +166,7 @@ class IngredientsList extends Component {
 
     return (
       <div>
-        <Button onClick={this.handleAddIngredient}>+ ADD A TIMING</Button>
-        <Button onClick={this.props.onSave.bind(this, this.state)}>SAVE</Button>
+        <Button onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
         {this.state.ingredients.length > 0 ?
           ingredients :
           noIngredients}

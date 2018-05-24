@@ -39,7 +39,7 @@ class TargetTime extends Component {
           </select>
         </div>
         <div>
-          <Button disabled={!this.props.isSaved} onClick={this.props.onSubmit.bind(this, this.state)}>GET YOUR PERSONALISED RECIPE PLAN</Button>
+          <Button>GET YOUR PERSONALISED RECIPE PLAN</Button>
         </div>
       </div>
     )
