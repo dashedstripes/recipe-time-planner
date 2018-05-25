@@ -5,45 +5,45 @@ import Button from '../components/Button';
 import IngredientTitle from '../components/IngredientTitle';
 import IngredientTiming from '../components/IngredientTiming';
 
-const defaultIngredients = [
-  {
-    id: 1,
-    title: 'Roast Chicken',
-    timings: [
-      {
-        id: 1,
-        type: TIMING_TYPES.PREP,
-        hours: 0,
-        minutes: 20
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: 'Mashed Potato',
-    timings: [
-      {
-        id: 1,
-        type: TIMING_TYPES.PREP,
-        hours: 0,
-        minutes: 20
-      },
-      {
-        id: 2,
-        type: TIMING_TYPES.COOK,
-        hours: 1,
-        minutes: 10
-      }
-    ]
-  }
-]
+// const defaultIngredients = [
+//   {
+//     id: 1,
+//     title: 'Roast Chicken',
+//     timings: [
+//       {
+//         id: 1,
+//         type: TIMING_TYPES.PREP,
+//         hours: 1,
+//         minutes: 20
+//       }
+//     ]
+//   },
+//   {
+//     id: 2,
+//     title: 'Mashed Potato',
+//     timings: [
+//       {
+//         id: 1,
+//         type: TIMING_TYPES.PREP,
+//         hours: 0,
+//         minutes: 20
+//       },
+//       {
+//         id: 2,
+//         type: TIMING_TYPES.COOK,
+//         hours: 1,
+//         minutes: 10
+//       }
+//     ]
+//   }
+// ]
 
 class IngredientsList extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      ingredients: defaultIngredients,
+      ingredients: [],
       target: {
         hour: 7,
         minutes: 30,
@@ -96,7 +96,7 @@ class IngredientsList extends Component {
           ingredient.timings.map((timing) => {
             if (timing.id === timingId) {
               // Make sure our timings are always a number
-              timing[e.target.name] = typeof e.target.value !== 'number' ? parseInt(e.target.value, 10) : e.target.value
+              timing[e.target.name] = e.target.value
             }
             return timing
           })
@@ -149,7 +149,9 @@ class IngredientsList extends Component {
   handleSubmit() {
     // This is where we send the state to be manupulated and returned to generate a 
     // recipe time plan.
-    generateRecipeTime(this.state)
+    console.log(
+      generateRecipeTime(this.state)
+    )
   }
 
   render() {
