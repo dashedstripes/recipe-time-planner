@@ -96,7 +96,7 @@ class IngredientsList extends Component {
           ingredient.timings.map((timing) => {
             if (timing.id === timingId) {
               // Make sure our timings are always a number
-              timing[e.target.name] = typeof e.target.value !== 'number' ? parseInt(e.target.value) : e.target.value
+              timing[e.target.name] = typeof e.target.value !== 'number' ? parseInt(e.target.value, 10) : e.target.value
             }
             return timing
           })
