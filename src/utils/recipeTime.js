@@ -36,9 +36,19 @@ function getSuffix(value) {
   }
 }
 
+function getTime(target, timing) {
+  return moment(`${target.hour}:${target.minutes}:${getSuffix(target.time)}`, `h:mm A`)
+    .subtract('hours', timing.hours)
+    .subtract('minutes', timing.minutes)
+    .format(`h:mm A`)
+}
+
 function generateRecipeTime({ ingredients, target }) {
   console.log(
-    moment(`${target.hour}:${target.minutes}:${getSuffix(target.time)}`, `h:mm A`).subtract('hours', 2).subtract('minutes', 10).format(`h:mm A`)
+    getTime(
+      target,
+      ingredients[0].timings[0]
+    )
   )
 }
 
