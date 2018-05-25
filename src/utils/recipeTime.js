@@ -38,8 +38,8 @@ function getSuffix(value) {
 
 function getTime(target, timing) {
   return moment(`${target.hour}:${target.minutes}:${getSuffix(target.time)}`, `h:mm A`)
-    .subtract('hours', timing.hours)
-    .subtract('minutes', timing.minutes)
+    .subtract(timing.hours, 'hours')
+    .subtract(timing.minutes, 'minutes')
     .format(`h:mm A`)
 }
 
