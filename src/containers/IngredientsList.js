@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
+import { TIMING_TYPES, TIMES } from '../utils/types'
+import generateRecipeTime from '../utils/recipeTime'
 import Button from '../components/Button';
 import IngredientTitle from '../components/IngredientTitle';
 import IngredientTiming from '../components/IngredientTiming';
-
-const TIMING_TYPES = {
-  PREP: 0,
-  COOK: 1
-}
-
-const TIMES = {
-  AM: 0,
-  PM: 1
-}
 
 const defaultIngredients = [
   {
@@ -156,7 +148,7 @@ class IngredientsList extends Component {
   handleSubmit() {
     // This is where we send the state to be manupulated and returned to generate a 
     // recipe time plan.
-    console.log(this.state)
+    generateRecipeTime(this.state)
   }
 
   render() {
