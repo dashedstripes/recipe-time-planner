@@ -238,7 +238,7 @@ class IngredientsList extends Component {
 
     return (
       <div className='row' >
-        <div className='col-6'>
+        <div className='col-md-6'>
           <div className='row'>
             <GoalTime
               hour={this.state.target.hour}
@@ -252,7 +252,7 @@ class IngredientsList extends Component {
             </div>
           </div>
         </div>
-        <div className='col-6 py-3 border-left ingredient-list'>
+        <div className='col-md-6 py-3 border-left ingredient-list'>
           <div className='my-3 text-right'>
             <Button type='primary' onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
           </div>
