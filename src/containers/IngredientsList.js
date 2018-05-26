@@ -228,7 +228,7 @@ class IngredientsList extends Component {
 
     let noIngredients = (
       <div className='text-right'>
-        <p>Add some ingredients with the button above ☝️</p>
+        <p>Add some ingredients with the button above <span role='img' aria-label='point up'>☝️</span></p>
       </div>
     )
 

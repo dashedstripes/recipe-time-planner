@@ -12,7 +12,9 @@ const IngredientTiming = ({ timingValue, hoursValue, minutesValue, onChange, onD
     <span>HRS</span>
     <input className='form-control mx-2' type='number' name='minutes' value={minutesValue} min={0} max={59} onChange={onChange} />
     <span>MINS</span>
-    <Button tabIndex='-1' onClick={onDelete}>Delete</Button>
+    <Button tabIndex='-1' onClick={onDelete}>
+      <i class="fas fa-trash-alt"></i>
+    </Button>
   </div>
 )
 
