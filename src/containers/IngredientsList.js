@@ -5,50 +5,81 @@ import Button from '../components/Button';
 import IngredientTitle from '../components/IngredientTitle';
 import IngredientTiming from '../components/IngredientTiming';
 
-// const defaultIngredients = [
-//   {
-//     id: 1,
-//     title: 'Roast Chicken',
-//     timings: [
-//       {
-//         id: 1,
-//         type: TIMING_TYPES.PREP,
-//         hours: 1,
-//         minutes: 20
-//       }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     title: 'Mashed Potato',
-//     timings: [
-//       {
-//         id: 1,
-//         type: TIMING_TYPES.PREP,
-//         hours: 0,
-//         minutes: 20
-//       },
-//       {
-//         id: 2,
-//         type: TIMING_TYPES.COOK,
-//         hours: 1,
-//         minutes: 10
-//       }
-//     ]
-//   }
-// ]
+const defaultIngredients = [
+  {
+    id: 1,
+    title: 'Roast Chicken',
+    timings: [
+      {
+        id: 1,
+        type: TIMING_TYPES.PREP,
+        hours: 0,
+        minutes: 20
+      },
+      {
+        id: 2,
+        type: TIMING_TYPES.COOK,
+        hours: 0,
+        minutes: 45
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Mashed Potato',
+    timings: [
+      {
+        id: 1,
+        type: TIMING_TYPES.PREP,
+        hours: 0,
+        minutes: 10
+      },
+      {
+        id: 2,
+        type: TIMING_TYPES.COOK,
+        hours: 0,
+        minutes: 30
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Green Beans',
+    timings: [
+      {
+        id: 1,
+        type: TIMING_TYPES.COOK,
+        hours: 0,
+        minutes: 20
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: 'Peas',
+    timings: [
+      {
+        id: 1,
+        type: TIMING_TYPES.COOK,
+        hours: 0,
+        minutes: 20
+      }
+    ]
+  }
+]
 
 class IngredientsList extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      ingredients: [],
+      ingredients: defaultIngredients,
       target: {
         hour: 7,
         minutes: 30,
         time: TIMES.PM
-      }
+      },
+      plan: []
     }
 
     this.handleTarget = this.handleTarget.bind(this)
@@ -149,9 +180,9 @@ class IngredientsList extends Component {
   handleSubmit() {
     // This is where we send the state to be manupulated and returned to generate a 
     // recipe time plan.
-    console.log(
-      generateRecipeTime(this.state)
-    )
+    this.setState({
+      plan: generateRecipeTime(this.state)
+    })
   }
 
   render() {
@@ -202,7 +233,7 @@ class IngredientsList extends Component {
             </select>
           </div>
           <div>
-            <Button onClick={this.handleSubmit}>GET YOUR PERSONALISED RECIPE PLAN</Button>
+            <Button onClick={this.handleSubmit}>VIEW YOUR RECIPE PLAN</Button>
           </div>
         </div>
       </div >

@@ -2,27 +2,36 @@ import moment from 'moment'
 import { TIMING_TYPES, TIMES } from '../utils/types'
 
 // This is the data object we want to generate from our state
-// let idealData = [
-//   [
-//     {
-//       title: 'Roast Chicken',
-//       type: TIMING_TYPES.PREP,
-//       time: '18:15 PM'
-//     },
-//     {
-//       title: 'Mash Potato',
-//       type: TIMING_TYPES.PREP,
-//       time: '18:15 PM'
-//     }
-//   ],
-//   [
-//     {
-//       title: 'Roast Chicken',
-//       type: TIMING_TYPES.COOK,
-//       time: '18:30 PM'
-//     }
-//   ]
-// ]
+[
+  {
+    time: '7:45 PM',
+    types: [
+      {
+        title: TIMING_TYPES.PREP,
+        ingredients: {
+          title: 'Roast Chicken'
+        }
+      },
+      {
+        title: TIMING_TYPES.COOK,
+        ingredients: {
+          title: 'Mashed Potato'
+        }
+      }
+    ]
+  },
+  {
+    time: '8:00 PM',
+    types: [
+      {
+        title: TIMING_TYPES.COOK,
+        ingredients: {
+          title: 'Green beans'
+        }
+      }
+    ]
+  }
+]
 
 let data = []
 
@@ -83,8 +92,24 @@ function generateRecipeTime({ ingredients, target }) {
     return 0
   })
 
+  // Create an array of times, we will then add each ingredient to each time
+  // This makes it a bit easier to manage the data in our UI
+  let times = data.map((item, index) => {
+    return {
+      time: item.time,
+      types: []
+    }
+  }).filter((item, index, self) => self.findIndex(t => t.time === item.time) === index)
+
+  // TODO: manipulate times array to match our ideal data source at start of file
+  times.forEach((time) => {
+
+  })
+
+  console.log(times)
+
   // Return fully sorted and formatted array
-  return data
+  return times
 }
 
 export default generateRecipeTime
