@@ -82,7 +82,7 @@ class IngredientsList extends Component {
         minutes: 30,
         time: TIMES.PM
       },
-      plan: []
+      plan: JSON.parse('[{ "time": "6:25 PM", "types": [{ "type": 0, "ingredients": [{ "title": "Chicken" }] }, { "type": 1, "ingredients": [] }] }, { "time": "6:45 PM", "types": [{ "type": 0, "ingredients": [] }, { "type": 1, "ingredients": [{ "title": "Chicken" }] }] }, { "time": "7:10 PM", "types": [{ "type": 0, "ingredients": [{ "title": "Potato" }, { "title": "Beans" }] }, { "type": 1, "ingredients": [] }] }]')
     }
 
     this.handleTarget = this.handleTarget.bind(this)
@@ -244,24 +244,32 @@ class IngredientsList extends Component {
     let recipePlan = this.state.plan.map((time, index) => {
       return (
         <div key={index}>
-          <h2>{time.time}</h2>
-          {time.types.map((type, index) => {
-            if (type.ingredients.length > 0) {
-              return (
-                <div key={index}>
-                  <h4>{getTimingTypeWord(type.type)}</h4>
-                  {type.ingredients.map((ingredient, index) => {
-                    return (
-                      <div key={index}>
-                        {ingredient.title}
+          <div className='row pb-5'>
+            <div className='col-4'>
+              <h2>{time.time}</h2>
+            </div>
+            <div className='col-8'>
+              {time.types.map((type, index) => {
+                if (type.ingredients.length > 0) {
+                  return (
+                    <div key={index}>
+                      <div className='text-muted'>
+                        <strong>{getTimingTypeWord(type.type)}</strong>
                       </div>
-                    )
-                  })}
-                </div>
-              )
-            }
-            return null
-          })}
+                      {type.ingredients.map((ingredient, index) => {
+                        return (
+                          <div key={index}>
+                            {ingredient.title}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )
+                }
+                return null
+              })}
+            </div>
+          </div>
         </div>
       )
     })
@@ -273,13 +281,13 @@ class IngredientsList extends Component {
             <div className='col-12 border-bottom py-3'>
               <p className='mb-0'>Have you ever struggled when cooking a complicated meal? Juggling multiple ingredients all with different prep and cook times can be a hassle. This app lets you add your ingredients to the panel on the right, set prep and/or cook times for each ingredient, it will then give you a step by step list including timings ending when you wish to serve the meal.</p>
             </div>
-            <div className='col-12 py-3'>
+            <div className='col-12 py-3 text-center border-bottom'>
               <p>What time would you like to dish up?</p>
-              <div>
-                <input type='number' name='hour' min={1} max={12} value={this.state.target.hour} onChange={this.handleTarget} />
+              <div className='form-group form-inline justify-content-center'>
+                <input className='form-control' type='number' name='hour' min={1} max={12} value={this.state.target.hour} onChange={this.handleTarget} />
                 <span>:</span>
-                <input type='number' name='minutes' min={0} max={59} value={this.state.target.minutes} onChange={this.handleTarget} />
-                <select name='time' value={this.state.target.time} onChange={this.handleTarget}>
+                <input className='form-control' type='number' name='minutes' min={0} max={59} value={this.state.target.minutes} onChange={this.handleTarget} />
+                <select className='form-control' name='time' value={this.state.target.time} onChange={this.handleTarget}>
                   <option value={TIMES.AM}>AM</option>
                   <option value={TIMES.PM}>PM</option>
                 </select>
@@ -287,9 +295,9 @@ class IngredientsList extends Component {
               <div>
                 <Button onClick={this.handleSubmit}>VIEW YOUR RECIPE PLAN</Button>
               </div>
-              <div>
-                {recipePlan}
-              </div>
+            </div>
+            <div className='col-12 py-3'>
+              {recipePlan}
             </div>
           </div>
         </div>
