@@ -73,7 +73,7 @@ class IngredientsList extends Component {
     super(props)
 
     this.state = {
-      ingredients: defaultIngredients,
+      ingredients: [],
       target: {
         hour: 7,
         minutes: 30,
@@ -192,19 +192,21 @@ class IngredientsList extends Component {
           value={ingredient.title}
           onChange={this.handleTitleChange.bind(this, ingredient.id)}
           onDelete={this.handleDeleteIngredient.bind(this, ingredient.id)} />
-        {ingredient.timings.map((timing) => (
-          <IngredientTiming
-            key={timing.id}
-            TIMING_TYPES={TIMING_TYPES}
-            timingValue={timing.type}
-            hoursValue={timing.hours}
-            minutesValue={timing.minutes}
-            onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)}
-            onDelete={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}
-          />
-        ))}
         <div>
-          <Button onClick={this.handleAddTiming.bind(this, ingredient.id)}>+ ADD A TIMING</Button>
+          {ingredient.timings.map((timing) => (
+            <IngredientTiming
+              key={timing.id}
+              TIMING_TYPES={TIMING_TYPES}
+              timingValue={timing.type}
+              hoursValue={timing.hours}
+              minutesValue={timing.minutes}
+              onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)}
+              onDelete={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}
+            />
+          ))}
+          <div>
+            <Button onClick={this.handleAddTiming.bind(this, ingredient.id)}>+ ADD A TIMING</Button>
+          </div>
         </div>
       </div>
     ))
@@ -241,28 +243,41 @@ class IngredientsList extends Component {
     })
 
     return (
-      <div>
-        <Button onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
-        {this.state.ingredients.length > 0 ?
-          ingredients :
-          noIngredients}
-        <div>
-          <p>What time would you like to dish up?</p>
-          <div>
-            <input type='number' name='hour' min={1} max={12} value={this.state.target.hour} onChange={this.handleTarget} />
-            <span>:</span>
-            <input type='number' name='minutes' min={0} max={59} value={this.state.target.minutes} onChange={this.handleTarget} />
-            <select name='time' value={this.state.target.time} onChange={this.handleTarget}>
-              <option value={TIMES.AM}>AM</option>
-              <option value={TIMES.PM}>PM</option>
-            </select>
-          </div>
-          <div>
-            <Button onClick={this.handleSubmit}>VIEW YOUR RECIPE PLAN</Button>
+      <div className='row'>
+        <div className='col-6'>
+          <div className='row'>
+            <div className='col-12 border-bottom py-3'>
+              <p>Have you ever struggled when cooking a complicated meal? Juggling multiple ingredients all with different prep and cook times can be a hassle. This app lets you add your ingredients to the panel on the right, set prep and/or cook times for each ingredient, it will then give you a step by step list including timings ending when you wish to serve the meal.</p>
+            </div>
+            <div className='col-12 py-3'>
+              <p>What time would you like to dish up?</p>
+              <div>
+                <input type='number' name='hour' min={1} max={12} value={this.state.target.hour} onChange={this.handleTarget} />
+                <span>:</span>
+                <input type='number' name='minutes' min={0} max={59} value={this.state.target.minutes} onChange={this.handleTarget} />
+                <select name='time' value={this.state.target.time} onChange={this.handleTarget}>
+                  <option value={TIMES.AM}>AM</option>
+                  <option value={TIMES.PM}>PM</option>
+                </select>
+              </div>
+              <div>
+                <Button onClick={this.handleSubmit}>VIEW YOUR RECIPE PLAN</Button>
+              </div>
+              <div>
+                {recipePlan}
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          {recipePlan}
+        <div className='col-6 py-3'>
+          <div className='my-3'>
+            <Button type='primary' onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
+          </div>
+          <div className='py-3'>
+            {this.state.ingredients.length > 0 ?
+              ingredients :
+              noIngredients}
+          </div>
         </div>
       </div >
     )
