@@ -2,7 +2,7 @@ import React from 'react'
 import Button from './Button'
 
 const IngredientTiming = ({ TIMING_TYPES, timingValue, hoursValue, minutesValue, onChange, onDelete }) => (
-  <div className='form-group form-inline my-2'>
+  <div className='form-group form-inline my-2 justify-content-end'>
     <select className='form-control' value={timingValue} tabIndex='-1' name='type' onChange={onChange}>
       <option value={TIMING_TYPES.PREP}>PREP</option>
       <option value={TIMING_TYPES.COOK}>COOK</option>

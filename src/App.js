@@ -6,7 +6,7 @@ class App extends Component {
     return (
       <div className='container'>
         <div className='border-bottom py-3'>
-          <h1>Recipe Time Planner <small>by <a href='https://pateo.co'>pateo</a></small></h1>
+          <h1 className='h4 mb-0'>Recipe Time Planner <small>by <a href='https://pateo.co'>pateo</a></small></h1>
         </div>
         <IngredientsList />
       </div>

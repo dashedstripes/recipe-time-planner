@@ -5,68 +5,71 @@ import Button from '../components/Button';
 import IngredientTitle from '../components/IngredientTitle';
 import IngredientTiming from '../components/IngredientTiming';
 
-const defaultIngredients = [
-  {
-    id: 1,
-    title: 'Roast Chicken',
-    timings: [
-      {
-        id: 1,
-        type: TIMING_TYPES.PREP,
-        hours: 0,
-        minutes: 20
-      },
-      {
-        id: 2,
-        type: TIMING_TYPES.COOK,
-        hours: 0,
-        minutes: 45
-      }
-    ]
-  },
-  {
-    id: 2,
-    title: 'Mashed Potato',
-    timings: [
-      {
-        id: 1,
-        type: TIMING_TYPES.PREP,
-        hours: 0,
-        minutes: 10
-      },
-      {
-        id: 2,
-        type: TIMING_TYPES.COOK,
-        hours: 0,
-        minutes: 30
-      }
-    ]
-  },
-  {
-    id: 3,
-    title: 'Green Beans',
-    timings: [
-      {
-        id: 1,
-        type: TIMING_TYPES.COOK,
-        hours: 0,
-        minutes: 20
-      }
-    ]
-  },
-  {
-    id: 4,
-    title: 'Peas',
-    timings: [
-      {
-        id: 1,
-        type: TIMING_TYPES.COOK,
-        hours: 0,
-        minutes: 20
-      }
-    ]
-  }
-]
+import '../css/ingredient-list.css'
+
+// This is what the ingredients data object looks like
+// [
+//   {
+//     id: 1,
+//     title: 'Roast Chicken',
+//     timings: [
+//       {
+//         id: 1,
+//         type: TIMING_TYPES.PREP,
+//         hours: 0,
+//         minutes: 20
+//       },
+//       {
+//         id: 2,
+//         type: TIMING_TYPES.COOK,
+//         hours: 0,
+//         minutes: 45
+//       }
+//     ]
+//   },
+//   {
+//     id: 2,
+//     title: 'Mashed Potato',
+//     timings: [
+//       {
+//         id: 1,
+//         type: TIMING_TYPES.PREP,
+//         hours: 0,
+//         minutes: 10
+//       },
+//       {
+//         id: 2,
+//         type: TIMING_TYPES.COOK,
+//         hours: 0,
+//         minutes: 30
+//       }
+//     ]
+//   },
+//   {
+//     id: 3,
+//     title: 'Green Beans',
+//     timings: [
+//       {
+//         id: 1,
+//         type: TIMING_TYPES.COOK,
+//         hours: 0,
+//         minutes: 20
+//       }
+//     ]
+//   },
+//   {
+//     id: 4,
+//     title: 'Peas',
+//     timings: [
+//       {
+//         id: 1,
+//         type: TIMING_TYPES.COOK,
+//         hours: 0,
+//         minutes: 20
+//       }
+//     ]
+//   }
+// ]
 
 class IngredientsList extends Component {
   constructor(props) {
@@ -208,7 +211,7 @@ class IngredientsList extends Component {
 
   render() {
     let ingredients = this.state.ingredients.map((ingredient) => (
-      <div key={ingredient.id}>
+      <div key={ingredient.id} className='mb-3'>
         <IngredientTitle
           value={ingredient.title}
           onChange={this.handleTitleChange.bind(this, ingredient.id)}
@@ -225,7 +228,7 @@ class IngredientsList extends Component {
               onDelete={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}
             />
           ))}
-          <div>
+          <div className='text-right'>
             <Button onClick={this.handleAddTiming.bind(this, ingredient.id)}>+ ADD A TIMING</Button>
           </div>
         </div>
@@ -268,7 +271,7 @@ class IngredientsList extends Component {
         <div className='col-6'>
           <div className='row'>
             <div className='col-12 border-bottom py-3'>
-              <p>Have you ever struggled when cooking a complicated meal? Juggling multiple ingredients all with different prep and cook times can be a hassle. This app lets you add your ingredients to the panel on the right, set prep and/or cook times for each ingredient, it will then give you a step by step list including timings ending when you wish to serve the meal.</p>
+              <p className='mb-0'>Have you ever struggled when cooking a complicated meal? Juggling multiple ingredients all with different prep and cook times can be a hassle. This app lets you add your ingredients to the panel on the right, set prep and/or cook times for each ingredient, it will then give you a step by step list including timings ending when you wish to serve the meal.</p>
             </div>
             <div className='col-12 py-3'>
               <p>What time would you like to dish up?</p>
@@ -290,8 +293,8 @@ class IngredientsList extends Component {
             </div>
           </div>
         </div>
-        <div className='col-6 py-3'>
-          <div className='my-3'>
+        <div className='col-6 py-3 border-left ingredient-list'>
+          <div className='my-3 text-right'>
             <Button type='primary' onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
           </div>
           <div className='py-3'>
