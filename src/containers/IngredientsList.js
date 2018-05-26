@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { TIMING_TYPES, TIMES, getTimingTypeWord } from '../utils/types'
 import generateRecipeTime from '../utils/recipeTime'
 import Button from '../components/Button';
-import IngredientTitle from '../components/IngredientTitle';
-import IngredientTiming from '../components/IngredientTiming';
 
 import '../css/ingredient-list.css'
+import Ingredient from '../components/Ingredient';
 
 // This is what the ingredients data object looks like
 // [
@@ -88,6 +87,9 @@ class IngredientsList extends Component {
     this.handleTarget = this.handleTarget.bind(this)
     this.handleAddIngredient = this.handleAddIngredient.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleTimingChange = this.handleTimingChange.bind(this)
+    this.handleDeleteTiming = this.handleDeleteTiming.bind(this)
+    this.handleAddTiming = this.handleAddTiming.bind(this)
   }
 
   handleTarget(e) {
@@ -211,28 +213,17 @@ class IngredientsList extends Component {
 
   render() {
     let ingredients = this.state.ingredients.map((ingredient) => (
-      <div key={ingredient.id} className='mb-3'>
-        <IngredientTitle
-          value={ingredient.title}
-          onChange={this.handleTitleChange.bind(this, ingredient.id)}
-          onDelete={this.handleDeleteIngredient.bind(this, ingredient.id)} />
-        <div>
-          {ingredient.timings.map((timing) => (
-            <IngredientTiming
-              key={timing.id}
-              TIMING_TYPES={TIMING_TYPES}
-              timingValue={timing.type}
-              hoursValue={timing.hours}
-              minutesValue={timing.minutes}
-              onChange={this.handleTimingChange.bind(this, ingredient.id, timing.id)}
-              onDelete={this.handleDeleteTiming.bind(this, ingredient.id, timing.id)}
-            />
-          ))}
-          <div className='text-right'>
-            <Button onClick={this.handleAddTiming.bind(this, ingredient.id)}>+ ADD A TIMING</Button>
-          </div>
-        </div>
-      </div>
+      <Ingredient
+        key={ingredient.id}
+        id={ingredient.id}
+        title={ingredient.title}
+        timings={ingredient.timings}
+        onTitleChange={this.handleTitleChange.bind(this, ingredient.id)}
+        onDelete={this.handleDeleteIngredient.bind(this, ingredient.id)}
+        onTimingChange={this.handleTimingChange}
+        onTimingDelete={this.handleDeleteTiming}
+        onAddTiming={this.handleAddTiming}
+      />
     ))
 
     let noIngredients = (

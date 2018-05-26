@@ -1,7 +1,8 @@
 import React from 'react'
+import { TIMING_TYPES } from '../utils/types'
 import Button from './Button'
 
-const IngredientTiming = ({ TIMING_TYPES, timingValue, hoursValue, minutesValue, onChange, onDelete }) => (
+const IngredientTiming = ({ timingValue, hoursValue, minutesValue, onChange, onDelete }) => (
   <div className='form-group form-inline my-2 justify-content-end'>
     <select className='form-control' value={timingValue} tabIndex='-1' name='type' onChange={onChange}>
       <option value={TIMING_TYPES.PREP}>PREP</option>
