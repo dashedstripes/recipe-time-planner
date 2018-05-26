@@ -82,7 +82,7 @@ class IngredientsList extends Component {
         minutes: 30,
         time: TIMES.PM
       },
-      plan: JSON.parse('[{ "time": "6:25 PM", "types": [{ "type": 0, "ingredients": [{ "title": "Chicken" }] }, { "type": 1, "ingredients": [] }] }, { "time": "6:45 PM", "types": [{ "type": 0, "ingredients": [] }, { "type": 1, "ingredients": [{ "title": "Chicken" }] }] }, { "time": "7:10 PM", "types": [{ "type": 0, "ingredients": [{ "title": "Potato" }, { "title": "Beans" }] }, { "type": 1, "ingredients": [] }] }]')
+      plan: []
     }
 
     this.handleTarget = this.handleTarget.bind(this)
