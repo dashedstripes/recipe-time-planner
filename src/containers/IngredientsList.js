@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { TIMING_TYPES, TIMES, getTimingTypeWord } from '../utils/types'
+import { TIMING_TYPES, TIMES } from '../utils/types'
 import generateRecipeTime from '../utils/recipeTime'
 import Button from '../components/Button';
 
 import '../css/ingredient-list.css'
 import Ingredient from '../components/Ingredient';
 import GoalTime from '../components/GoalTime';
+import RecipePlan from '../components/RecipePlan';
 
 // This is what the ingredients data object looks like
 // [
@@ -233,41 +234,10 @@ class IngredientsList extends Component {
       </div>
     )
 
-    let recipePlan = this.state.plan.map((time, index) => {
-      return (
-        <div key={index}>
-          <div className='row pb-5'>
-            <div className='col-4'>
-              <h2>{time.time}</h2>
-            </div>
-            <div className='col-8'>
-              {time.types.map((type, index) => {
-                if (type.ingredients.length > 0) {
-                  return (
-                    <div key={index}>
-                      <div className='text-muted'>
-                        <strong>{getTimingTypeWord(type.type)}</strong>
-                      </div>
-                      {type.ingredients.map((ingredient, index) => {
-                        return (
-                          <div key={index}>
-                            {ingredient.title}
-                          </div>
-                        )
-                      })}
-                    </div>
-                  )
-                }
-                return null
-              })}
-            </div>
-          </div>
-        </div>
-      )
-    })
+    let recipePlan = this.state.plan.map((time, index) => <RecipePlan key={index} time={time} />)
 
     return (
-      <div className='row'>
+      <div className='row' >
         <div className='col-6'>
           <div className='row'>
             <GoalTime
