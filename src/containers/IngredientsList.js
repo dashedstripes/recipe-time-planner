@@ -133,6 +133,8 @@ class IngredientsList extends Component {
                 value = parseInt(e.target.value, 10)
               }
 
+              // If it's not a number, i.e the field is currently blank,
+              // cast to a string to avoid errors
               if (isNaN(value)) {
                 value = e.target.value.toString()
               }
