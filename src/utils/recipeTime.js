@@ -33,8 +33,6 @@ import { TIMING_TYPES, TIMES } from '../utils/types'
 //   }
 // ]
 
-let formattedIngredients = []
-
 function getSuffix(value) {
   if (value === TIMES.AM) {
     return 'AM'
@@ -60,8 +58,12 @@ function formatTime(time) {
   return time.format(`h:mm A`)
 }
 
-function generateRecipeTime({ ingredients, target }) {
-  formattedIngredients = []
+function generateRecipeTime(i, t) {
+  // Here we parse the jason passed in from 
+  // ingredients list to retrieve our deep copy
+  let ingredients = JSON.parse(i)
+  let target = JSON.parse(t)
+  let formattedIngredients = []
 
   ingredients.forEach((ingredient) => {
     // For each ingredient, set the starting target time

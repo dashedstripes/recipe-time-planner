@@ -101,7 +101,7 @@ class IngredientsList extends Component {
         title: '',
         timings: [
           {
-            id: 1,
+            id: Date.now(),
             type: TIMING_TYPES.PREP,
             hours: 0,
             minutes: 20
@@ -127,7 +127,17 @@ class IngredientsList extends Component {
           ingredient.timings.map((timing) => {
             if (timing.id === timingId) {
               // Make sure our timings are always a number
-              timing[e.target.name] = e.target.value
+              let value = e.target.value
+
+              if (typeof value === 'string') {
+                value = parseInt(e.target.value, 10)
+              }
+
+              if (isNaN(value)) {
+                value = e.target.value.toString()
+              }
+
+              timing[e.target.name] = value
             }
             return timing
           })
@@ -180,9 +190,18 @@ class IngredientsList extends Component {
   handleSubmit() {
     // This is where we send the state to be manupulated and returned to generate a 
     // recipe time plan.
+
+    // We stringify the state as we need a deep copy of the state
+    // unfortunately Object.assign and spread operator only does
+    // a shallow copy
+    let ingredients = JSON.stringify(this.state.ingredients)
+    let target = JSON.stringify(this.state.target)
+    let generatedPlan = generateRecipeTime(ingredients, target)
+
     this.setState({
-      plan: generateRecipeTime(this.state)
+      plan: generatedPlan
     })
+
   }
 
   render() {
@@ -221,14 +240,14 @@ class IngredientsList extends Component {
       return (
         <div key={index}>
           <h2>{time.time}</h2>
-          {time.types.map((type) => {
+          {time.types.map((type, index) => {
             if (type.ingredients.length > 0) {
               return (
-                <div>
+                <div key={index}>
                   <h4>{getTimingTypeWord(type.type)}</h4>
-                  {type.ingredients.map((ingredient) => {
+                  {type.ingredients.map((ingredient, index) => {
                     return (
-                      <div>
+                      <div key={index}>
                         {ingredient.title}
                       </div>
                     )
