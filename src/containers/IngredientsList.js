@@ -228,7 +228,7 @@ class IngredientsList extends Component {
 
     let noIngredients = (
       <div>
-        <p>No Ingredients.</p>
+        <p>Add some ingredients with the button above ☝️</p>
       </div>
     )
 
