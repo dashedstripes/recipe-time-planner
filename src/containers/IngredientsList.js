@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { TIMING_TYPES, TIMES } from '../utils/types'
 import generateRecipeTime from '../utils/recipeTime'
 import Button from '../components/Button';
-
-import '../css/ingredient-list.css'
 import Ingredient from '../components/Ingredient';
 import GoalTime from '../components/GoalTime';
 import RecipePlan from '../components/RecipePlan';
@@ -247,7 +245,7 @@ class IngredientsList extends Component {
               onChange={this.handleTarget}
               onSubmit={this.handleSubmit}
             />
-            <div className='col-12 py-3'>
+            <div className='col-12 recipe-plan'>
               {recipePlan}
             </div>
           </div>

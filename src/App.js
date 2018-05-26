@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import IngredientsList from './containers/IngredientsList';
+import './css/style.css'
 
 class App extends Component {
   render() {
