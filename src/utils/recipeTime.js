@@ -2,38 +2,38 @@ import moment from 'moment'
 import { TIMING_TYPES, TIMES } from '../utils/types'
 
 // This is the data object we want to generate from our state
-[
-  {
-    time: '7:45 PM',
-    types: [
-      {
-        title: TIMING_TYPES.PREP,
-        ingredients: {
-          title: 'Roast Chicken'
-        }
-      },
-      {
-        title: TIMING_TYPES.COOK,
-        ingredients: {
-          title: 'Mashed Potato'
-        }
-      }
-    ]
-  },
-  {
-    time: '8:00 PM',
-    types: [
-      {
-        title: TIMING_TYPES.COOK,
-        ingredients: {
-          title: 'Green beans'
-        }
-      }
-    ]
-  }
-]
+// [
+//   {
+//     time: '7:45 PM',
+//     types: [
+//       {
+//         type: TIMING_TYPES.PREP,
+//         ingredients: [{
+//           title: 'Roast Chicken'
+//         }]
+//       },
+//       {
+//         type: TIMING_TYPES.COOK,
+//         ingredients: [{
+//           title: 'Mashed Potato'
+//         }]
+//       }
+//     ]
+//   },
+//   {
+//     time: '8:00 PM',
+//     types: [
+//       {
+//         type: TIMING_TYPES.COOK,
+//         ingredients: [{
+//           title: 'Green beans'
+//         ]
+//       }
+//     ]
+//   }
+// ]
 
-let data = []
+let formattedIngredients = []
 
 function getSuffix(value) {
   if (value === TIMES.AM) {
@@ -61,7 +61,7 @@ function formatTime(time) {
 }
 
 function generateRecipeTime({ ingredients, target }) {
-  data = []
+  formattedIngredients = []
 
   ingredients.forEach((ingredient) => {
     // For each ingredient, set the starting target time
@@ -75,7 +75,7 @@ function generateRecipeTime({ ingredients, target }) {
     ingredient.timings.forEach((timing) => {
       currentTime = calculateTime(formatTime(currentTime), timing)
 
-      data.push({
+      formattedIngredients.push({
         title: ingredient.title,
         type: parseInt(timing.type, 10),
         time: formatTime(currentTime)
@@ -83,10 +83,10 @@ function generateRecipeTime({ ingredients, target }) {
     })
   })
 
-  // Sort the data array by time so the things that need to be done first are
+  // Sort the formattedIngredients array by time so the things that need to be done first are
   // at the start of the array.
   let format = 'h:mm A'
-  data.sort((a, b) => {
+  formattedIngredients.sort((a, b) => {
     if (moment(a.time, format).isBefore(moment(b.time, format))) return -1
     if (moment(b.time, format).isBefore(moment(a.time, format))) return 1
     return 0
@@ -94,19 +94,36 @@ function generateRecipeTime({ ingredients, target }) {
 
   // Create an array of times, we will then add each ingredient to each time
   // This makes it a bit easier to manage the data in our UI
-  let times = data.map((item, index) => {
+  let times = formattedIngredients.map((item, index) => {
     return {
       time: item.time,
-      types: []
+      types: [
+        {
+          type: TIMING_TYPES.PREP,
+          ingredients: []
+        },
+        {
+          type: TIMING_TYPES.COOK,
+          ingredients: []
+        }
+      ]
     }
   }).filter((item, index, self) => self.findIndex(t => t.time === item.time) === index)
 
-  // TODO: manipulate times array to match our ideal data source at start of file
+  // Manipulate times array to match our ideal data source at start of file
   times.forEach((time) => {
-
+    formattedIngredients.forEach((ingredient) => {
+      if (time.time === ingredient.time) {
+        time.types.forEach((type) => {
+          if (type.type === ingredient.type) {
+            type.ingredients.push({
+              title: ingredient.title
+            })
+          }
+        })
+      }
+    })
   })
-
-  console.log(times)
 
   // Return fully sorted and formatted array
   return times

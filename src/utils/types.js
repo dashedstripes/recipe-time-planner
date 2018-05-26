@@ -8,7 +8,18 @@ const TIMES = {
   PM: 1
 }
 
+function getTimingTypeWord(timingType) {
+  if (timingType === TIMING_TYPES.PREP) {
+    return 'Prep'
+  }
+
+  if (timingType === TIMING_TYPES.COOK) {
+    return 'Cook'
+  }
+}
+
 module.exports = {
   TIMING_TYPES,
-  TIMES
+  TIMES,
+  getTimingTypeWord
 }

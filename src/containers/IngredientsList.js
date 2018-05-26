@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TIMING_TYPES, TIMES } from '../utils/types'
+import { TIMING_TYPES, TIMES, getTimingTypeWord } from '../utils/types'
 import generateRecipeTime from '../utils/recipeTime'
 import Button from '../components/Button';
 import IngredientTitle from '../components/IngredientTitle';
@@ -215,6 +215,31 @@ class IngredientsList extends Component {
       </div>
     )
 
+    let recipePlan = this.state.plan.map((time, index) => {
+      return (
+        <div key={index}>
+          <h2>{time.time}</h2>
+          {time.types.map((type) => {
+            if (type.ingredients.length > 0) {
+              return (
+                <div>
+                  <h4>{getTimingTypeWord(type.type)}</h4>
+                  {type.ingredients.map((ingredient) => {
+                    return (
+                      <div>
+                        {ingredient.title}
+                      </div>
+                    )
+                  })}
+                </div>
+              )
+            }
+            return null
+          })}
+        </div>
+      )
+    })
+
     return (
       <div>
         <Button onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
@@ -235,6 +260,9 @@ class IngredientsList extends Component {
           <div>
             <Button onClick={this.handleSubmit}>VIEW YOUR RECIPE PLAN</Button>
           </div>
+        </div>
+        <div>
+          {recipePlan}
         </div>
       </div >
     )
