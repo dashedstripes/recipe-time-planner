@@ -10,9 +10,9 @@ const GoalTime = ({ hour, minutes, time, onChange, onSubmit }) => (
     <div className='col-12 py-3 text-center border-bottom'>
       <p>What time would you like to dish up?</p>
       <div className='form-group form-inline justify-content-center'>
-        <input className='form-control' type='number' name='hour' min={1} max={12} value={hour} onChange={onChange} />
+        <input className='form-control goal-time-input' type='number' name='hour' min={1} max={12} value={hour} onChange={onChange} />
         <span>:</span>
-        <input className='form-control' type='number' name='minutes' min={0} max={59} value={minutes} onChange={onChange} />
+        <input className='form-control goal-time-input' type='number' name='minutes' min={0} max={59} value={minutes} onChange={onChange} />
         <select className='form-control' name='time' value={time} onChange={onChange}>
           <option value={TIMES.AM}>AM</option>
           <option value={TIMES.PM}>PM</option>
