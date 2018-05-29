@@ -7,7 +7,7 @@ const GoalTime = ({ hour, minutes, time, onChange, onSubmit }) => (
     <div className='col-12 border-bottom py-3'>
       <p className='mb-0'>Have you ever struggled when cooking a complicated meal? Juggling multiple ingredients all with different prep and cook times can be a hassle. This app lets you add your ingredients to the panel on the right, set prep and/or cook times for each ingredient, it will then give you a step by step list including timings ending when you wish to serve the meal.</p>
     </div>
-    <div className='col-12 py-3 text-center border-bottom'>
+    <div className='col-12 py-5 text-center border-bottom'>
       <p>What time would you like to dish up?</p>
       <div className='form-group form-inline justify-content-center'>
         <input className='form-control goal-time-input' type='number' name='hour' min={1} max={12} value={hour} onChange={onChange} />

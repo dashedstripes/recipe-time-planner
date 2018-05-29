@@ -227,7 +227,7 @@ class IngredientsList extends Component {
     ))
 
     let noIngredients = (
-      <div className='text-right'>
+      <div className='text-center'>
         <p>Add some ingredients with the button above <span role='img' aria-label='point up'>☝️</span></p>
       </div>
     )
@@ -250,14 +250,21 @@ class IngredientsList extends Component {
             </div>
           </div>
         </div>
-        <div className='col-md-6 py-3 border-left ingredient-list'>
-          <div className='my-3 text-right'>
-            <Button type='primary' onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
+        <div className='col-md-6'>
+          <div className='p-3 ingredient-list-header d-flex justify-content-between align-items-center'>
+            <div>
+              <p className='mb-0'><strong>Your Ingredients</strong></p>
+            </div>
+            <div>
+              <Button type='primary' onClick={this.handleAddIngredient}>+ ADD AN INGREDIENT</Button>
+            </div>
           </div>
-          <div className='py-3'>
-            {this.state.ingredients.length > 0 ?
-              ingredients :
-              noIngredients}
+          <div className='py-3 border-left ingredient-list'>
+            <div className='p-3'>
+              {this.state.ingredients.length > 0 ?
+                ingredients :
+                noIngredients}
+            </div>
           </div>
         </div>
       </div >

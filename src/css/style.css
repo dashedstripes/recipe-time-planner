@@ -67,11 +67,11 @@ a:hover {
 }
 
 .border-bottom {
-  border-bottom: 1px solid #efefef!important;
+  border-bottom: 1px solid #eaeaea!important;
 }
 
 .border-left {
-  border-left: 1px solid #efefef!important;
+  border-left: 1px solid #eaeaea!important;
 }
 
 .btn-outline-danger {
@@ -102,6 +102,11 @@ a:hover {
 .ingredient-list {
   max-height: 80vh;
   overflow: scroll;
+}
+
+.ingredient-list-header {
+  border-left: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .recipe-plan {

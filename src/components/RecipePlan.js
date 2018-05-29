@@ -19,7 +19,7 @@ const RecipePlan = ({ time }) => (
                   {type.ingredients.map((ingredient, index) => {
                     return (
                       <div key={index}>
-                        <p>{ingredient.title}</p>
+                        <p className='mb-0'>{ingredient.title}</p>
                       </div>
                     )
                   })}
