@@ -5,7 +5,8 @@ import Button from './Button'
 const GoalTime = ({ hour, minutes, time, onChange, onSubmit }) => (
   <div>
     <div className='col-12 border-bottom py-3'>
-      <p className='mb-0'>Have you ever struggled when cooking a complicated meal? Juggling multiple ingredients all with different prep and cook times can be a hassle. This app lets you add your ingredients to the panel on the right, set prep and/or cook times for each ingredient, it will then give you a step by step list including timings ending when you wish to serve the meal.</p>
+      <p>Have you ever struggled to time a complicated meal? Recipes with lots of ingredients like Thanksgiving and Christmas can be hard to manage without a bit of planning.</p>
+      <p className='mb-0'>Use this tool to work out when to prep and cook each ingredient in your recipe. Just add your ingredients to the panel on the right with their respective prep and cook times, then choose a time to dish up and press "View Recipe Plan".</p>
     </div>
     <div className='col-12 py-5 text-center border-bottom'>
       <p>What time would you like to dish up?</p>
