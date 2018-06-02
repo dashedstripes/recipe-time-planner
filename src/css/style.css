@@ -117,3 +117,16 @@ a:hover {
 .goal-time-input {
   margin: 0rem 0.5rem;
 }
+
+@media screen and (max-width: 576px) {
+  .ingredient-list {
+    max-height: 100%;
+    overflow: auto;
+  }
+
+  .form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+}
