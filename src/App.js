@@ -7,7 +7,9 @@ class App extends Component {
     return (
       <div className='container'>
         <div className='border-bottom py-4'>
-          <h1 className='h4 mb-0'>Recipe Time Planner <small>by <a href='https://pateo.co'>pateo</a></small></h1>
+          <h1 className='h4 mb-0'>
+            <img src="/images/logo.png" className="logo" alt="Tymer" />
+          </h1>
         </div>
         <IngredientsList />
       </div>
