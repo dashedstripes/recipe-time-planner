@@ -2,7 +2,7 @@
   "name": "tymer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://tymer.pateo.co",
+  "homepage": "https://tymer.pateo.co",
   "dependencies": {
     "moment": "^2.22.1",
     "react": "^16.3.2",
